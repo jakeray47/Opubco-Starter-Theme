@@ -30,10 +30,11 @@
 			<!-- /post details -->
 
 			<?php the_content(); // Dynamic Content ?>
-
+			
+			<div class="addthis_sharing_toolbox"></div>
 
 			<?php edit_post_link(); // Always handy to have Edit Post Links available ?>
-
+			
 			<?php //comments_template(); ?>
 
 		</article>

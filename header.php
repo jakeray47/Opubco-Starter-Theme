@@ -12,6 +12,11 @@
 		<meta name="description" content="<?php bloginfo('description'); ?>">
 
 		<?php wp_head(); ?>
+		<?php 
+			if(is_single()) {
+				echo '<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51f8094020106c93"></script>';
+			} 
+		?>
 		<script>
         // conditionizr.com
         // configure environment tests
@@ -20,7 +25,7 @@
             tests: {}
         });
         </script>
-
+		
 	</head>
 	<body <?php body_class(); ?>>
 
