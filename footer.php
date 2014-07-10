@@ -45,6 +45,16 @@
 
 
     		});
+
+
+	    		/*--- SPLIT LOGO 
+
+	    		var logo = "<?php echo logo();?>";
+	    		var link = '<?php echo home_url(); ?>';
+	    		
+	    		split_menu(link,logo,'Logo');
+
+	    		*/
 		
 
 
