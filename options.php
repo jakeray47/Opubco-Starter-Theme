@@ -123,9 +123,27 @@ function optionsframework_options() {
 		'type' => 'section');
 
 	$options[] = array(
-		'name' => __('Address', 'options_framework_theme'),
-		'desc' => __('Enter your full address.', 'options_framework_theme'),
-		'id' => 'address',
+		'name' => __('Street Address', 'options_framework_theme'),
+		'desc' => __('Enter your street address.', 'options_framework_theme'),
+		'id' => 'street-address',
+		'type' => 'text');
+	
+	$options[] = array(
+		'name' => __('City', 'options_framework_theme'),
+		'desc' => __('Enter your city.', 'options_framework_theme'),
+		'id' => 'city',
+		'type' => 'text');
+	
+	$options[] = array(
+		'name' => __('State', 'options_framework_theme'),
+		'desc' => __('Enter your state.', 'options_framework_theme'),
+		'id' => 'state',
+		'type' => 'text');
+	
+	$options[] = array(
+		'name' => __('Zip', 'options_framework_theme'),
+		'desc' => __('Enter your zip code.', 'options_framework_theme'),
+		'id' => 'zip',
 		'type' => 'text');
 
 	$options[] = array(
@@ -133,7 +151,22 @@ function optionsframework_options() {
 		'desc' => __('Enter your company phone #.', 'options_framework_theme'),
 		'id' => 'phone',
 		'type' => 'text');
-
+		
+	$options[] = array(
+		'name' => __('Social Media', 'options_framework_theme'),
+		'type' => 'heading');
+	
+	$options[] = array(
+		'name' => __('Facebook URL', 'options_framework_theme'),
+		'desc' => __('Enter your Facebook URL.', 'options_framework_theme'),
+		'id' => 'facebook',
+		'type' => 'text');
+	
+	$options[] = array(
+		'name' => __('Twitter URL', 'options_framework_theme'),
+		'desc' => __('Enter your Twitter URL.', 'options_framework_theme'),
+		'id' => 'twitter',
+		'type' => 'text');
 
 	return $options;
 }

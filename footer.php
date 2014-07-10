@@ -6,11 +6,30 @@
 
 				<div class="wrapper">
 
-				<!-- copyright -->
-				<p class="copyright">
-					&copy; <?php echo date('Y'); ?> Copyright <?php bloginfo('name'); ?> <br>
-				</p>
-				<!-- /copyright -->
+				<!-- Address Schema / Copyright -->
+						<div itemscope itemtype="http://schema.org/LocalBusiness">	
+							<p>
+								<span itemprop="name">&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?></span>
+							
+								<?php if(of_get_option( 'street-address' )){ 
+									echo '<br /><span itemprop="streetAddress">' . of_get_option( 'street-address' ) . '</span><br />';
+								} ?>  		
+								<?php if(of_get_option( 'city' )){ 
+									echo '<span itemprop="addressLocality">' . of_get_option( 'city' ) . '</span>, ';
+								} ?> 							
+								<?php if(of_get_option( 'state' )){ 
+									echo '<span itemprop="addressRegion">' . of_get_option( 'state' ) . '</span>';
+								} ?>
+								<?php if(of_get_option( 'zip' )){ 
+									echo '<span itemprop="postalcode">' . of_get_option( 'zip' ) . '</span>';
+								} ?>
+							
+								<?php if(of_get_option( 'phone' )){ 
+									echo '<br /><span itemprop="telephone">' . of_get_option( 'phone' ) . '</span>';
+								} ?>
+							</p>
+						</div>
+				<!-- /Address Schema / Copyright -->
 
 				<!-- Footer Menu -->
 				<?php //wp_nav_menu( array('theme_location' => 'footer-menu' )); ?>
