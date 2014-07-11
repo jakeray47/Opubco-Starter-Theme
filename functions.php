@@ -677,7 +677,6 @@ function change_order_by( $query ) {
 }
 
 
-
 /*------------------------------------*\
 	ShortCode Functions
 \*------------------------------------*/
@@ -925,7 +924,7 @@ function testimonials($atts, $content = null) {
 }
 add_shortcode('testimonials', 'testimonials');
 
-// THE SHORTCODE ----> [testimonials words="news" more="View More" posts="5" category=""]
+// THE SHORTCODE ----> [testimonials words="50" more="View More" posts="5" category=""]
 
 
 ?>
