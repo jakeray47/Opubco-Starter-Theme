@@ -368,33 +368,14 @@ function html5wp_pagination()
     ));
 }
 
-// Custom Excerpts
-function html5wp_index($length) // Create 20 Word Callback for Index page Excerpts, call using html5wp_excerpt('html5wp_index');
-{
-    return 20;
-}
-
-// Create 40 Word Callback for Custom Post Excerpts, call using html5wp_excerpt('html5wp_custom_post');
-function html5wp_custom_post($length)
-{
-    return 40;
-}
-
-// Create the Custom Excerpts callback
-function html5wp_excerpt($length_callback = '', $more_callback = '')
+// Custom Excerpt Function Example: custom_excerpt(40, 'Learn More');
+//This will create an excerpt with 40 words and a Learn More link.
+function custom_excerpt($length_callback = '', $more_callback = '')
 {
     global $post;
-    if (function_exists($length_callback)) {
-        add_filter('excerpt_length', $length_callback);
-    }
-    if (function_exists($more_callback)) {
-        add_filter('excerpt_more', $more_callback);
-    }
-    $output = get_the_excerpt();
-    $output = apply_filters('wptexturize', $output);
-    $output = apply_filters('convert_chars', $output);
-    $output = '<p>' . $output . '</p>';
-    echo $output;
+    $content = get_the_content();
+    $trimmed_content = wp_trim_words( $content, $length_callback, '... <a class="more" href="'. get_permalink() .'">$more_callback</a>' );
+    echo $trimmed_content;
 }
 
 // Custom View Article link to Post
