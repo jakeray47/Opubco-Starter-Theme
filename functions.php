@@ -647,6 +647,20 @@ register_post_type('testimonials', // Register Custom Post Type
 
 require_once( trailingslashit( get_template_directory() ). 'inc/custom-fields.php' );
 
+
+// This allows a custom JS file to run on the admin when restricting custom fields to page templates.
+//Orginally the custom fields would show up on any page until you saved it. This hides it until you select
+//the page template you set it too. 
+
+function customField_admin_scripts($hook) {
+     $screen = get_current_screen();
+
+    if( in_array( $screen->id, array( 'page'/* custom post_type_names too */ ) ) ) {
+        wp_enqueue_script( 'custom-fields-js', get_template_directory_uri()."/js/custom-fields.js", array( 'jquery' ));
+    }
+}
+add_action('admin_enqueue_scripts', 'customField_admin_scripts');
+
 /*------------------------------------*\
     Drag and Drop Page Order
 \*------------------------------------*/
