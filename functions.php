@@ -908,4 +908,37 @@ add_shortcode('testimonials', 'testimonials');
 // THE SHORTCODE ----> [testimonials words="50" more="View More" posts="5" category=""]
 
 
+//ADD HOMEPAGE EDIT LINK IN ADMIN MENU UNDER DASHBOARD MENU
+add_action( 'admin_menu' , 'admin_menu_new_items' );
+function admin_menu_new_items() {
+    global $submenu;
+ 
+ $front_page = get_option('page_on_front');
+ 
+ if($front_page != 0){
+ $submenu['index.php'][500] = array( 'Edit Home Page', 'manage_options' , get_edit_post_link($front_page) ); 
+ 
+ }
+}
+
+//ADD HOMEPAGE EDIT LINK TO ADMIN BAR
+add_action('admin_bar_menu', 'add_toolbar_items',999);
+
+function add_toolbar_items($admin_bar){
+	
+	$front_page = get_option('page_on_front');
+	
+ if($front_page != 0){	
+    $admin_bar->add_menu( array(
+        'id'    => 'edit-home',
+        'parent' => 'site-name',
+        'title' => 'Edit Home Page',
+        'href'  => get_edit_post_link($front_page),
+        'meta'  => array(
+            'title' => __('Edit Home Page'),            
+        ),
+    ));
+	}
+}
+
 ?>
