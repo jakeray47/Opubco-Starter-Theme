@@ -56,3 +56,32 @@ function custom_h1_field( array $meta_boxes ) {
 
 add_filter( 'cmb_meta_boxes', 'custom_h1_field' );
 
+
+
+/*------------------------------------*\
+   Featured Posts
+\*------------------------------------*/
+
+
+function feature_this_post( array $meta_boxes ) {
+  
+  $fields = array(
+
+      array( 'id' => 'featured_post',  'name' => 'Featured Post', 'type' => 'checkbox', 'desc' => 'Make this post Featured.' ),
+  );
+
+  $meta_boxes[] = array(
+    'title' => 'Featured Post',
+    'pages' =>  array('post','events','artists','artwork' ),
+    'context' => 'side',
+    'priority' => 'high',
+    'fields' => $fields
+  );
+
+
+  return $meta_boxes;
+
+}
+
+add_filter( 'cmb_meta_boxes', 'feature_this_post' );
+

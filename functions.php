@@ -907,6 +907,122 @@ add_shortcode('testimonials', 'testimonials');
 
 // THE SHORTCODE ----> [testimonials words="50" more="View More" posts="5" category=""]
 
+/*------------------------------------*\
+    CUSTOM MENU SHORTCODE
+\*------------------------------------*/
+
+function menu($atts, $content = null) {
+
+    extract(shortcode_atts(array(
+        "menu_name" => ''
+    ), $atts));
+
+    ob_start();?>
+
+    <div class="custom_menu">
+                    
+        <?php wp_nav_menu( array('menu' => $menu_name )); ?>
+    </div>
+
+    <?php $content = ob_get_contents();
+    ob_end_clean();
+    return $content;
+
+}
+add_shortcode('menu', 'menu');
+
+
+/*--------------------------------*\
+    FEATURE POSTS SHORCODE
+\*--------------------------------*/
+
+function featured($atts, $content = null) {
+
+    extract(shortcode_atts(array(
+        "post_type" => '',
+        "post_id" => '',
+        "posts" => ''
+    ), $atts));
+
+    global $post;
+
+    ob_start();?>
+
+    <?php
+
+        // The Query
+        $feature_query = new WP_Query( $args );
+
+        // The Loop
+        if ( $feature_query->have_posts() ) {
+            echo '<ul class="featured">';
+            while ( $feature_query->have_posts() ) {
+                $feature_query->the_post(); ?>
+
+                <li>
+                    
+                    <!-- post thumbnail -->
+                        <?php if ( has_post_thumbnail()) : // Check if thumbnail exists ?>
+                            <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+                                <?php the_post_thumbnail('featured-mega'); // Declare pixel size you need inside the array ?>
+                            </a>
+                        <?php endif; ?>
+                    <!-- /post thumbnail -->
+                    <h5><?php the_title(); ?></h5>
+
+                    <p>
+                        <?php custom_excerpt(10, 'Learn More'); ?>
+                    </p>
+                    </li>
+
+                </li>                
+
+
+           <?php }
+            echo '</ul>';
+        } else {
+            // no posts found
+        }
+        /* Restore original Post Data */
+        wp_reset_postdata(); 
+
+    $content = ob_get_contents();
+    ob_end_clean();
+    return $content;
+
+}
+add_shortcode('featured', 'featured');
+
+/*-----------------------------------*\
+    ADD SHORTCODE BUTTON FOR TINYMCE
+\*-----------------------------------*/
+
+// Hooks your functions into the correct filters
+function add_custom_menu_button() {
+    // check user permissions
+    if ( !current_user_can( 'edit_posts' ) && !current_user_can( 'edit_pages' ) ) {
+        return;
+    }
+    // check if WYSIWYG is enabled
+    if ( 'true' == get_user_option( 'rich_editing' ) ) {
+        add_filter( 'mce_external_plugins', 'cm_add_tinymce_plugin' );
+        add_filter( 'mce_buttons', 'cm_register_mce_button' );
+    }
+}
+add_action('admin_head', 'add_custom_menu_button');
+
+// Declare script for new button
+function cm_add_tinymce_plugin( $plugin_array ) {
+    $plugin_array['custom_menu_button'] = get_template_directory_uri() .'/js/menu_shortcodes.js';
+    return $plugin_array;
+}
+
+// Register new button in the editor
+function cm_register_mce_button( $buttons ) {
+    array_push( $buttons, 'custom_menu_button' );
+    return $buttons;
+}
+
 
 //ADD HOMEPAGE EDIT LINK IN ADMIN MENU UNDER DASHBOARD MENU
 add_action( 'admin_menu' , 'admin_menu_new_items' );
