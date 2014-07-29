@@ -374,7 +374,7 @@ function custom_excerpt($length_callback = '', $more_callback = '')
 {
     global $post;
     $content = get_the_content();
-    $trimmed_content = wp_trim_words( $content, $length_callback, '... <a class="more" href="'. get_permalink() .'">$more_callback</a>' );
+    $trimmed_content = wp_trim_words( $content, $length_callback, '... <a class="more" href="'. get_permalink() .'">' .$more_callback .'</a>' );
     echo $trimmed_content;
 }
 
