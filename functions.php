@@ -466,6 +466,18 @@ function html5blankcomments($comment, $args, $depth)
 	<?php endif; ?>
 <?php }
 
+//Grabs LOGO
+function logo(){
+
+    if(of_get_option( 'logo_upload' )){
+        $logo = of_get_option( 'logo_upload' );
+    } else {
+        $logo = get_template_directory_uri().'/img/logo.png';
+    }
+
+    return $logo;
+}
+
 /*------------------------------------*\
 	Actions + Filters + ShortCodes
 \*------------------------------------*/
