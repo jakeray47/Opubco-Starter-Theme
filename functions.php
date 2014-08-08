@@ -56,15 +56,15 @@ if (function_exists('add_theme_support'))
     add_theme_support('automatic-feed-links');
 
     // Localisation Support
-    load_theme_textdomain('html5blank', get_template_directory() . '/languages');
+    load_theme_textdomain('opubcotheme', get_template_directory() . '/languages');
 }
 
 /*------------------------------------*\
 	Functions
 \*------------------------------------*/
 
-// HTML5 Blank navigation
-function html5blank_nav()
+// OPUBCO Theme navigation
+function opubcotheme_nav()
 {
 	wp_nav_menu(
 	array(
@@ -206,8 +206,8 @@ class schema_walker_nav_menu extends Walker_Nav_Menu {
 } // Walker_Nav_Menu
 
 
-// Load HTML5 Blank scripts (header.php)
-function html5blank_header_scripts()
+// Load OPUBCO Theme scripts (header.php)
+function opubcotheme_header_scripts()
 {
     if (!is_admin()) {
 
@@ -224,8 +224,8 @@ function html5blank_header_scripts()
         wp_register_script('flexslider', get_template_directory_uri() . '/js/jquery.flexslider-min.js', array(), '1.0.0'); // flexslider
         wp_enqueue_script('flexslider'); // Enqueue it!
 
-        wp_register_script('html5blankscripts', get_template_directory_uri() . '/js/scripts.js', array(), '1.0.0'); // Custom scripts
-        wp_enqueue_script('html5blankscripts'); // Enqueue it!
+        wp_register_script('opubcothemescripts', get_template_directory_uri() . '/js/scripts.js', array(), '1.0.0'); // Custom scripts
+        wp_enqueue_script('opubcothemescripts'); // Enqueue it!
 
         wp_register_script('meanmenu', get_template_directory_uri() . '/js/jquery.meanmenu.min.js', array(), '1.0.0'); // Custom scripts
         wp_enqueue_script('meanmenu'); // Enqueue it!
@@ -250,8 +250,8 @@ function admin_scripts(){
 
 add_action( 'admin_head', 'admin_scripts' );
 
-// Load HTML5 Blank conditional scripts
-function html5blank_conditional_scripts(){
+// Load OPUBCO Theme conditional scripts
+function opubcotheme_conditional_scripts(){
 
     if (is_page('pagenamehere')) {
         wp_register_script('scriptname', get_template_directory_uri() . '/js/scriptname.js', array('jquery'), '1.0.0'); // Conditional script(s)
@@ -263,8 +263,8 @@ function html5blank_conditional_scripts(){
 }
 
 
-// Load HTML5 Blank styles
-function html5blank_styles()
+// Load OPUBCO Theme styles
+function opubcotheme_styles()
 {
     wp_register_style('normalize', get_template_directory_uri() . '/normalize.css', array(), '1.0', 'all');
     wp_enqueue_style('normalize'); // Enqueue it!
@@ -278,17 +278,17 @@ function html5blank_styles()
     wp_register_style('fontawesome', '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css');
     wp_enqueue_style( 'fontawesome');
 
-    wp_register_style('html5blank', get_template_directory_uri() . '/style.css', array(), '1.0', 'all');
-    wp_enqueue_style('html5blank'); // Enqueue it!
+    wp_register_style('opubcotheme', get_template_directory_uri() . '/style.css', array(), '1.0', 'all');
+    wp_enqueue_style('opubcotheme'); // Enqueue it!
 
 }
 
-// Register HTML5 Blank Navigation
+// Register OPUBCO Theme Navigation
 function register_html5_menu()
 {
     register_nav_menus(array( // Using array to specify more menus if needed
-        'header-menu' => __('Header Menu', 'html5blank'), // Main Navigation,
-        'footer-menu' => __('Footer Menu', 'html5blank') // Footer Navigation
+        'header-menu' => __('Header Menu', 'opubcotheme'), // Main Navigation,
+        'footer-menu' => __('Footer Menu', 'opubcotheme') // Footer Navigation
     ));
 }
 
@@ -334,8 +334,8 @@ if (function_exists('register_sidebar'))
 {
     // Define Sidebar Widget Area 1
     register_sidebar(array(
-        'name' => __('Widget Area 1', 'html5blank'),
-        'description' => __('Description for this widget-area...', 'html5blank'),
+        'name' => __('Widget Area 1', 'opubcotheme'),
+        'description' => __('Description for this widget-area...', 'opubcotheme'),
         'id' => 'widget-area-1',
         'before_widget' => '<div id="%1$s" class="%2$s widget">',
         'after_widget' => '</div>',
@@ -382,7 +382,7 @@ function custom_excerpt($length_callback = '', $more_callback = '')
 function html5_blank_view_article($more)
 {
     global $post;
-    return '... <a class="view-article" href="' . get_permalink($post->ID) . '">' . __('View Article', 'html5blank') . '</a>';
+    return '... <a class="view-article" href="' . get_permalink($post->ID) . '">' . __('View Article', 'opubcotheme') . '</a>';
 }
 
 // Remove Admin bar
@@ -405,7 +405,7 @@ function remove_thumbnail_dimensions( $html )
 }
 
 // Custom Gravatar in Settings > Discussion
-function html5blankgravatar ($avatar_defaults)
+function opubcothemegravatar ($avatar_defaults)
 {
     $myavatar = get_template_directory_uri() . '/img/gravatar.jpg';
     $avatar_defaults[$myavatar] = "Custom Gravatar";
@@ -423,7 +423,7 @@ function enable_threaded_comments()
 }
 
 // Custom Comments Callback
-function html5blankcomments($comment, $args, $depth)
+function opubcothemecomments($comment, $args, $depth)
 {
 	$GLOBALS['comment'] = $comment;
 	extract($args, EXTR_SKIP);
@@ -483,12 +483,12 @@ function logo(){
 \*------------------------------------*/
 
 // Add Actions
-add_action('init', 'html5blank_header_scripts'); // Add Custom Scripts to wp_head
-add_action('wp_print_scripts', 'html5blank_conditional_scripts'); // Add Conditional Page Scripts
+add_action('init', 'opubcotheme_header_scripts'); // Add Custom Scripts to wp_head
+add_action('wp_print_scripts', 'opubcotheme_conditional_scripts'); // Add Conditional Page Scripts
 add_action('get_header', 'enable_threaded_comments'); // Enable Threaded Comments
-add_action('wp_enqueue_scripts', 'html5blank_styles'); // Add Theme Stylesheet
-add_action('init', 'register_html5_menu'); // Add HTML5 Blank Menu
-add_action('init', 'create_post_type_html5'); // Add our HTML5 Blank Custom Post Type
+add_action('wp_enqueue_scripts', 'opubcotheme_styles'); // Add Theme Stylesheet
+add_action('init', 'register_html5_menu'); // Add OPUBCO Theme Menu
+add_action('init', 'create_post_type_html5'); // Add our OPUBCO Theme Custom Post Type
 add_action('widgets_init', 'my_remove_recent_comments_style'); // Remove inline Recent Comment Styles from wp_head()
 add_action('init', 'html5wp_pagination'); // Add our HTML5 Pagination
 
@@ -508,7 +508,7 @@ remove_action('wp_head', 'rel_canonical');
 remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
 
 // Add Filters
-add_filter('avatar_defaults', 'html5blankgravatar'); // Custom Gravatar in Settings > Discussion
+add_filter('avatar_defaults', 'opubcothemegravatar'); // Custom Gravatar in Settings > Discussion
 add_filter('body_class', 'add_slug_to_body_class'); // Add slug to body class (Starkers build)
 add_filter('widget_text', 'do_shortcode'); // Allow shortcodes in Dynamic Sidebar
 add_filter('widget_text', 'shortcode_unautop'); // Remove <p> tags in Dynamic Sidebars (better!)
@@ -539,7 +539,7 @@ add_shortcode('html5_shortcode_demo_2', 'html5_shortcode_demo_2'); // Place [htm
 	Custom Post Types
 \*------------------------------------*/
 
-// Create 1 Custom Post type for a Demo, called HTML5-Blank
+// Create 1 Custom Post type for a Demo, called OPUBCO-Theme
 function create_post_type_html5()
 {
    /* register_taxonomy_for_object_type('category', 'html5-blank'); // Register Taxonomies for Category
@@ -547,18 +547,18 @@ function create_post_type_html5()
     register_post_type('html5-blank', // Register Custom Post Type
         array(
         'labels' => array(
-            'name' => __('HTML5 Blank Custom Post', 'html5blank'), // Rename these to suit
-            'singular_name' => __('HTML5 Blank Custom Post', 'html5blank'),
-            'add_new' => __('Add New', 'html5blank'),
-            'add_new_item' => __('Add New HTML5 Blank Custom Post', 'html5blank'),
-            'edit' => __('Edit', 'html5blank'),
-            'edit_item' => __('Edit HTML5 Blank Custom Post', 'html5blank'),
-            'new_item' => __('New HTML5 Blank Custom Post', 'html5blank'),
-            'view' => __('View HTML5 Blank Custom Post', 'html5blank'),
-            'view_item' => __('View HTML5 Blank Custom Post', 'html5blank'),
-            'search_items' => __('Search HTML5 Blank Custom Post', 'html5blank'),
-            'not_found' => __('No HTML5 Blank Custom Posts found', 'html5blank'),
-            'not_found_in_trash' => __('No HTML5 Blank Custom Posts found in Trash', 'html5blank')
+            'name' => __('OPUBCO Theme Custom Post', 'opubcotheme'), // Rename these to suit
+            'singular_name' => __('OPUBCO Theme Custom Post', 'opubcotheme'),
+            'add_new' => __('Add New', 'opubcotheme'),
+            'add_new_item' => __('Add New OPUBCO Theme Custom Post', 'opubcotheme'),
+            'edit' => __('Edit', 'opubcotheme'),
+            'edit_item' => __('Edit OPUBCO Theme Custom Post', 'opubcotheme'),
+            'new_item' => __('New OPUBCO Theme Custom Post', 'opubcotheme'),
+            'view' => __('View OPUBCO Theme Custom Post', 'opubcotheme'),
+            'view_item' => __('View OPUBCO Theme Custom Post', 'opubcotheme'),
+            'search_items' => __('Search OPUBCO Theme Custom Post', 'opubcotheme'),
+            'not_found' => __('No OPUBCO Theme Custom Posts found', 'opubcotheme'),
+            'not_found_in_trash' => __('No OPUBCO Theme Custom Posts found in Trash', 'opubcotheme')
         ),
         'public' => true,
         'hierarchical' => true, // Allows your posts to behave like Hierarchy Pages
@@ -568,7 +568,7 @@ function create_post_type_html5()
             'editor',
             'excerpt',
             'thumbnail'
-        ), // Go to Dashboard Custom HTML5 Blank post for supports
+        ), // Go to Dashboard Custom OPUBCO Theme post for supports
         'can_export' => true, // Allows export in Tools > Export
         'taxonomies' => array(
             'post_tag',
@@ -579,18 +579,18 @@ function create_post_type_html5()
     register_post_type('slider', // Register Custom Post Type
         array(
         'labels' => array(
-            'name' => __('Slider', 'html5blank'), // Rename these to suit
-            'singular_name' => __('Slider', 'html5blank'),
-            'add_new' => __('Add New', 'html5blank'),
-            'add_new_item' => __('Add New Slider', 'html5blank'),
-            'edit' => __('Edit', 'html5blank'),
-            'edit_item' => __('Edit Slider', 'html5blank'),
-            'new_item' => __('New Slider', 'html5blank'),
-            'view' => __('View Slider', 'html5blank'),
-            'view_item' => __('View Slider', 'html5blank'),
-            'search_items' => __('Search Slider', 'html5blank'),
-            'not_found' => __('No Sliders found', 'html5blank'),
-            'not_found_in_trash' => __('No Sliders found in Trash', 'html5blank')
+            'name' => __('Slider', 'opubcotheme'), // Rename these to suit
+            'singular_name' => __('Slider', 'opubcotheme'),
+            'add_new' => __('Add New', 'opubcotheme'),
+            'add_new_item' => __('Add New Slider', 'opubcotheme'),
+            'edit' => __('Edit', 'opubcotheme'),
+            'edit_item' => __('Edit Slider', 'opubcotheme'),
+            'new_item' => __('New Slider', 'opubcotheme'),
+            'view' => __('View Slider', 'opubcotheme'),
+            'view_item' => __('View Slider', 'opubcotheme'),
+            'search_items' => __('Search Slider', 'opubcotheme'),
+            'not_found' => __('No Sliders found', 'opubcotheme'),
+            'not_found_in_trash' => __('No Sliders found in Trash', 'opubcotheme')
         ),
         'public' => true,
         'hierarchical' => true, // Allows your posts to behave like Hierarchy Pages
@@ -598,7 +598,7 @@ function create_post_type_html5()
         'supports' => array(
             'title',
             'thumbnail',
-        ), // Go to Dashboard Custom HTML5 Blank post for supports
+        ), // Go to Dashboard Custom OPUBCO Theme post for supports
         'can_export' => true, // Allows export in Tools > Export
     ));
 
@@ -606,18 +606,18 @@ register_taxonomy_for_object_type('category', 'html5-blank');
 register_post_type('testimonials', // Register Custom Post Type
         array(
         'labels' => array(
-            'name' => __('Testimonial', 'html5blank'), // Rename these to suit
-            'singular_name' => __('Testimonial', 'html5blank'),
-            'add_new' => __('Add New', 'html5blank'),
-            'add_new_item' => __('Add New Testimonial', 'html5blank'),
-            'edit' => __('Edit', 'html5blank'),
-            'edit_item' => __('Edit Testimonial', 'html5blank'),
-            'new_item' => __('New Testimonial', 'html5blank'),
-            'view' => __('View Testimonial', 'html5blank'),
-            'view_item' => __('View Testimonial', 'html5blank'),
-            'search_items' => __('Search Testimonial', 'html5blank'),
-            'not_found' => __('No Testimonials found', 'html5blank'),
-            'not_found_in_trash' => __('No Testimonials found in Trash', 'html5blank')
+            'name' => __('Testimonial', 'opubcotheme'), // Rename these to suit
+            'singular_name' => __('Testimonial', 'opubcotheme'),
+            'add_new' => __('Add New', 'opubcotheme'),
+            'add_new_item' => __('Add New Testimonial', 'opubcotheme'),
+            'edit' => __('Edit', 'opubcotheme'),
+            'edit_item' => __('Edit Testimonial', 'opubcotheme'),
+            'new_item' => __('New Testimonial', 'opubcotheme'),
+            'view' => __('View Testimonial', 'opubcotheme'),
+            'view_item' => __('View Testimonial', 'opubcotheme'),
+            'search_items' => __('Search Testimonial', 'opubcotheme'),
+            'not_found' => __('No Testimonials found', 'opubcotheme'),
+            'not_found_in_trash' => __('No Testimonials found in Trash', 'opubcotheme')
         ),
         'public' => true,
         'hierarchical' => true, // Allows your posts to behave like Hierarchy Pages
@@ -626,7 +626,7 @@ register_post_type('testimonials', // Register Custom Post Type
             'title',
             'editor',
             'thumbnail',
-        ), // Go to Dashboard Custom HTML5 Blank post for supports
+        ), // Go to Dashboard Custom OPUBCO Theme post for supports
         'can_export' => true, // Allows export in Tools > Export
         'taxonomies' => array(
             'category'
